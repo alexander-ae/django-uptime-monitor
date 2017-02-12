@@ -1,0 +1,73 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load uptime_tags %}
+
+{% block title %}Website: {{ site.name }} | {% endblock title %}
+
+{% block classbody %}website-notifica{% endblock classbody %}
+
+{% block content %}
+  <div id='main-content' class="medium-12 large-12 columns">
+
+    <div class="row">
+      <div class="small-12 medium-8 medium-centered large-6 large-centered columns">
+
+        <h1 class="text-center">{{ site.name }}</h1>
+
+        <form action="#" method='post'>
+          {% csrf_token %}
+          {{ form.slug }}
+
+          <fieldset>
+            <legend>NOTIFICACIONES</legend>
+
+            <div class="row">
+              <div class="large-12 columns">
+                {{ form.alerta_email }}
+                <label for="id_alerta_email">{{ form.alerta_email.label }}</label>
+                {{ form.alerta_email.help_text }}
+              </div>
+            </div>
+
+            {% if global_alertas_activas %}
+              <div class="row">
+                <div class="large-12 columns">
+                  <p class='color_red alerta'>Las alertas estan inactivas debido a la <a href="{% url 'settings' %}">configuración
+                    global</a>.</p>
+                </div>
+              </div>
+            {% endif %}
+          </fieldset>
+
+          <a id='BtnActividad' href="{% url 'website' slug=site.slug %}" class="left">
+            <i class="fi fi-arrow-left"></i>
+            Detalles del sitio
+          </a>
+
+          <input class='right success button' type="submit" value='ACTUALIZAR'>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src='{% static "js/libs/notify.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/dev.js" %}'></script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          {% for message in messages %}
+              $.notify("{{ message }}", {
+                  className: 'success',
+                  globalPosition: 'top center',
+                  showDuration: 700
+              });
+          {% endfor %}
+
+          {% if global_alertas_activas %}
+              $('input').attr('disabled', 'disabled');
+          {% endif %}
+
+      });
+  </script>
+{% endblock js %}

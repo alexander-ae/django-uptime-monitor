@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>{% block title %}Ingresar | {% endblock title %}Uptime Monitor</title>
+
+  <link rel="author" href='humans.txt'/>
+  <link href='http://fonts.googleapis.com/css?family=Dosis:400,600|Montserrat:400,600' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="{% static 'foundation/css/foundation.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'foundation/icons/foundation-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% block css %}{% endblock css %}
+  <script src="{% static 'foundation/js/vendor/modernizr.js' %}"></script>
+</head>
+
+<body class='{% block classbody %}{% endblock classbody %}'>
+
+{% block content %}
+{% endblock content %}
+
+<script src="{% static 'foundation/js/vendor/jquery.js' %}"></script>
+<script src="{% static 'js/libs/jquery.wait.js' %}"></script>
+<script src="{% static 'foundation/js/foundation.min.js' %}"></script>
+
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

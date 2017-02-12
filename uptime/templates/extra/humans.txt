@@ -1,0 +1,35 @@
+/* TEAM */
+Owner: Alexander Ayasca Esquives
+Site: http://alexanderae.com
+
+Twitter: https://twitter.com/__alexander_
+
+Location: Lima - Peru
+
+
+/* SITE */
+
+Standards: HTML5, CSS3
+Software: Chakra Linux, Sublime Text, Google Chrome, Bitbucket
+
+Components:
+
+    Django, The Web framework for perfectionists (with deadlines):
+        https://www.djangoproject.com/
+
+    Foundation, The most advanced responsive front-end framework in the world:
+        http://foundation.zurb.com/
+
+    Foundation Icons: http://zurb.com/playground/foundation-icon-fonts-3
+
+    Jquery, fastclick.js, Jquery.cookie.js, modernizr.js, placeholder.js, normalize.css, chart.js, flot.js, jquery.wait.js, moment.js, notify.js, jquery.dropdown.js (Codrops)
+
+Inspiration:
+    Uptime Robot: https://uptimerobot.com/
+
+    (cs)spinner: pure CSS loading animations with minimal effort!
+
+
+P.S. Everything is a Remix -> http://everythingisaremix.info/
+
+

@@ -1,0 +1,394 @@
+/* IMPORTS */
+
+@import "variables.less";
+@import "fonts.less";
+
+
+/* GENERAL */
+
+#main-row {
+    max-width: 100%;
+    height: 100%;
+}
+
+#main-content {
+    padding-left: 25px;
+    padding-top: 50px;
+}
+
+.topbar {
+    background: url('../img/topbar.png') 0;
+    height: 3px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.alert-box.error {
+    background-color: @color_error;
+    border-color: @color_error_border;
+    color: white;
+}
+
+.alert-box .close {
+    color: white;
+    opacity: .8;
+}
+
+.block {
+    display: block;
+}
+
+.progress {
+    margin-bottom: 0;
+}
+
+.label {
+    background-color: #aaa;
+
+    &.success {
+        background-color: @color_ok;
+    }
+
+    &.error,
+    &.alert {
+        background-color: @color_error;
+    }
+}
+
+input:disabled + label {
+    opacity: .8;
+}
+
+ul.errorlist {
+    color: @color_error;
+    font-size: .9rem;
+    margin-bottom: 0;
+}
+
+
+/* MIXINS */
+.activo_inactivo {
+    span {
+        padding: 5px 7px;
+        border-radius: 4px;
+        color: white;
+
+        min-width: 84px;
+        display: block;
+        text-align: center;
+    }
+
+    span.up {
+        background: @color_ok;
+    }
+
+    span.down {
+        background: @color_error;
+    }
+}
+
+
+/* LOGIN */
+
+.login-panel {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 30px;
+
+    i {
+        font-size: 1.8rem;
+        line-height: 50px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    form input,
+    form span {
+        height: 50px;
+    }
+
+    .welcome {
+        font-size: 26px;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    p {
+        font-size: 13px;
+        font-weight: 200;
+        margin-left: 25%;
+    }
+
+    .button {
+        margin-left: 35%;
+    }
+}
+
+/* DASHBOARD */
+
+body.dashboard {
+
+    table {
+        width: 100%;
+    }
+
+    tr.site {
+        td.td_progress {
+            width: 100%;
+        }
+
+        .progress {
+            background-color: #eee;
+            overflow-y: hidden;
+
+            .meter {
+                width: 100%;
+                float: right;
+                margin: 1px 0;
+            }
+
+            // activo
+            .meter.t {
+                background-color: @color_ok;
+            }
+
+            // inactivo
+            .meter.f {
+                background-color: @color_error;
+            }
+        }
+    }
+
+    #donut_legenda ul {
+        padding: 20px 5px 0;
+        margin-bottom: 1rem;
+
+        li {
+            display: block;
+            position: relative;
+            margin-bottom: 4px;
+            padding: 2px 8px 2px 28px;
+            font-size: 1rem;
+        }
+
+        span{
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            margin-top: 3px;
+        }
+    }
+
+    #actividad {
+        background: white;
+        margin-bottom: 1.25rem;
+        border: solid 1px #ddd;
+        padding: 5px;
+
+        .bloque {
+            float: left;
+        }
+    }
+
+    table#ultimos_eventos {
+        .activo_inactivo;
+    }
+}
+
+
+body.websites {
+
+    td.nombre {
+        font-size: 1rem;
+    }
+
+    td.estado {
+        .activo_inactivo;
+
+        span {
+            display: block;
+            text-align: center;
+            min-width: 85px;
+        }
+    }
+
+    td.monitor {
+        font-size: 1.2rem;
+
+        .fi-check {
+            color: @color_ok_light;
+        }
+
+        .fi-x {
+            color: @color_error_light;
+        }
+    }
+
+    #select-estado {
+        visibility: hidden;
+    }
+
+    #nuevo_sitio {
+        font-size: 1rem;
+        margin-bottom: 0;
+
+        i.icon {
+            text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+    }
+
+    .button-group > li {
+        margin: 0 5px 15px 0;
+    }
+
+    .button-group li {
+        margin: 0 .5rem 0 0;
+        float: left;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    #searchForm {
+
+        .search-icon {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 6px 10px;
+            float: right;
+            color: @color_gray;
+        }
+
+        #search {
+            width: 120px;
+            height: 45px;
+            float: right;
+            -webkit-transition: width .5s;
+            -moz-transition: width .5s;
+            transition: width .5s;
+
+            &:focus {
+                width: 180px;
+                background-color: #fff;
+                border-color: @color_green;
+
+                -webkit-box-shadow: 0 0 5px fade(@color_green, 40%);
+                -moz-box-shadow: 0 0 5px fade(@color_green, 40%);
+                box-shadow: 0 0 5px fade(@color_green, 40%);
+            }
+        }
+    }
+}
+
+
+body.website {
+    table {
+        table-layout: fixed;
+        width: 100%;
+
+        td {
+            word-wrap: break-word;
+        }
+    }
+
+    #actividad {
+        width: 100%;
+        height: 300px;
+        margin: 10px auto 30px auto;
+        padding: 0 15px;
+
+        .flot-y {
+            top: 50%;
+            left: 2px;
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            position: absolute;
+            text-align: center;
+            font-size: .8rem;
+        }
+    }
+
+    table#ultimos_eventos {
+        .activo_inactivo;
+    }
+
+    #buttons {
+        margin-top: 40px;
+
+        .button {
+            display: block;
+            max-width: 180px;
+            font-size: 1rem;
+            padding-left: .5rem;
+            padding-right: .75rem;
+
+            i {
+                font-size: 1.5rem;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+
+body.website-new,
+body.website-edit {
+    form {
+        legend {
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding: 0 10px;
+        }
+
+        .row {
+            margin: 10px 0;
+        }
+
+        input {
+            margin-bottom: .5rem;
+        }
+
+        span.help_text {
+            font-size: .9rem;
+            color: #777;
+        }
+    }
+
+    .action_button {
+        padding: 13px 17px;
+        float: left;
+
+        &:hover {
+            border: 1px dashed #ccc;
+            padding: 12px 16px;
+        }
+
+        i.fi {
+            font-size: 1.6rem;
+            vertical-align: middle;
+        }
+    }
+}
+
+
+body.website-notifica {
+    p.alerta {
+        font-size: .875rem;
+
+        a {
+            color: @color_red;
+            text-decoration: underline;
+        }
+    }
+}

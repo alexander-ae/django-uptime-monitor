@@ -1,0 +1,83 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load uptime_tags %}
+
+{% block title %}Websites | {% endblock title %}
+
+{% block classbody %}website-new{% endblock classbody %}
+
+{% block content %}
+  <div id='main-content' class="medium-12 large-12 columns">
+
+    <div class="row">
+      <div class="small-12 medium-8 medium-centered large-6 large-centered columns">
+
+        <form action="#" method='post'>
+          {% csrf_token %}
+          <fieldset>
+            <legend>REGISTRO</legend>
+
+            <div class="row">
+              <div class="large-12 columns">
+                {{ form.active }}
+                <label for="id_active"><strong>{{ form.active.label }}</strong></label>
+                {{ form.active.help_text }}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <label for="id_name">
+                  <strong>{{ form.name.label }}</strong>
+                  {{ form.name }}
+                  <span class="help_text">{{ form.name.help_text }}</span>
+                  {{ form.name.errors }}
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <label for="id_url">
+                  <strong>{{ form.url.label }}</strong>
+                  {{ form.url }}
+                  <span class="help_text">{{ form.url.help_text }}</span>
+                  {{ form.url.errors }}
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <label for="id_timeout">
+                  <strong>{{ form.timeout.label }}</strong>
+                  {{ form.timeout }}
+                  <span class="help_text">{{ form.timeout.help_text }}</span>
+                  {{ form.timeout.errors }}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <input class='right success button' type="submit" value='REGISTRAR'>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src='{% static "js/libs/notify.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/dev.js" %}'></script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          {% for message in messages %}
+              $.notify("{{ message }}", {
+                  className: 'success',
+                  globalPosition: 'top center',
+                  showDuration: 700
+              });
+          {% endfor %}
+      });
+  </script>
+{% endblock js %}

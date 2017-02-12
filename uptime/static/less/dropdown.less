@@ -1,0 +1,158 @@
+
+@import "variables.less";
+
+.cd-dropdown,
+.cd-select {
+    position: relative;
+    width: 170px;
+    display: block;
+}
+
+.cd-dropdown > span {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    color: #777;
+    font-weight: 700;
+    font-size: 1.2 rem;
+    background: #fff;
+    display: block;
+    padding: 0 20px 0 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.cd-dropdown > span:after {
+    content: '\25BC';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45px;
+    text-align: center;
+    font-size: 1.2 rem;
+    padding: 10px;
+    height: 70%;
+    line-height: 24px;
+    border-left: 1px solid #ddd;
+}
+
+.cd-dropdown.cd-active > span:after {
+    content: '\25B2';
+}
+
+.cd-dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    background: #ddd;
+    z-index: 1;
+    height: 0px;
+    transition: height .20s ease;
+    padding: 2px;
+}
+
+.cd-dropdown ul li {
+    display: block;
+}
+
+.cd-dropdown ul li span {
+    width: 100%;
+    background: #fff;
+    line-height: 45px;
+    padding: 0 5px 0 25px;
+    display: block;
+    color: #9e9e9e;
+    cursor: pointer;
+    font-weight: 700;
+
+    &:before {
+        margin-right: 5px;
+    }
+}
+
+.cd-dropdown > span,
+.cd-dropdown ul li span {
+    -webkit-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cd-dropdown > span span[class^="fi-"],
+.cd-dropdown > span span[class*=" fi-"]{
+    padding: 0;
+
+    &:before {
+        margin-right: 5px;
+    }
+
+    &.fi-arrow-up {
+        color: @color_ok;
+    }
+
+    &.fi-arrow-down {
+        color: @color_error;
+    }
+
+    &.no-info {
+        color: #666;
+    }
+}
+
+/* Select fallback styling */
+.cd-select {
+    border: 1px solid #ddd;
+}
+
+/* demo 1*/
+
+.cd-dropdown > span,
+.cd-dropdown ul li:nth-last-child(-n+3) span {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+}
+
+.cd-dropdown ul {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.cd-dropdown ul li {
+    position: absolute;
+    width: 100%;
+}
+
+.cd-active.cd-dropdown > span {
+    color: #fc756f;
+}
+
+.cd-active.cd-dropdown > span,
+.cd-active.cd-dropdown ul li span {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+}
+
+.cd-active.cd-dropdown ul li span {
+    transition: height 0.2s linear 0s;
+
+    &:hover {
+        background: @color_default;
+        color: #fff;
+
+        &.fi-arrow-up {
+            background: @color_ok;
+        }
+
+        &.fi-arrow-down {
+            background: @color_error;
+        }
+
+        &.no-info {
+            background: #666;
+        }
+    }
+}

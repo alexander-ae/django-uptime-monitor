@@ -1,0 +1,93 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Configuración Global| {% endblock title %}
+
+{% block classbody %}ajustes{% endblock classbody %}
+
+{% block content %}
+  <div id='main-content' class="medium-12 large-12 columns">
+    <div class="row">
+      <h1 class='text-center'>CONFIGURACIÓN GLOBAL</h1>
+    </div>
+
+    <div class="row">
+      <div class="medium-6 large-5 columns">
+
+        <form action="#" method='POST'>
+          <input type="hidden" name='action' value='perfil'>
+          <fieldset>
+            <legend>Perfil de usuario</legend>
+
+            <div class="row collapse">
+
+              {% csrf_token %}
+              <input type="hidden" name='form' value='email'>
+
+              <div class="small-3 large-2 columns">
+                <span class="prefix">Email</span>
+              </div>
+
+              <div class="small-6 large-7 columns">
+                <input name='email' type="email" placeholder="admin@acme.com" value='{{ user.email }}'>
+              </div>
+
+              <div class="small-3 large-3 columns">
+                <input type="submit" value='Actualizar' class='button postfix'>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+        <form action="#" method='POST'>
+          {% csrf_token %}
+          <input type="hidden" name='action' value='alertas'>
+          <fieldset>
+            <legend>Configuración de las alertas</legend>
+
+            <div class="row">
+              <div class="small-5 columns">
+                <label for="" class='right'>{{ formAlerta.alertas.label }}</label>
+              </div>
+
+              <div class="small-7 columns">
+                {{ formAlerta.alertas }}
+                {{ formAlerta.alertas.errors }}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="small-6 large-3 columns">
+                <button class='postfix button'>Actualizar</button>
+              </div>
+            </div>
+
+
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="medium-6 large-5 large-offset-2 columns">
+        <h3>Resumen de actividad</h3>
+
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src='{% static "js/libs/notify.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/dev.js" %}'></script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          {% for message in messages %}
+              $.notify("{{ message }}", {
+                  className: 'success',
+                  globalPosition: 'top center',
+                  showDuration: 700
+              });
+          {% endfor %}
+      });
+  </script>
+{% endblock js %}

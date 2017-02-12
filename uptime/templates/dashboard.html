@@ -1,0 +1,87 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Dashboard | {% endblock title %}
+
+{% block classbody %}dashboard{% endblock classbody %}
+
+{% block content %}
+  <div id='main-content' class="medium-12 large-12 columns">
+    <div class="row">
+    </div>
+
+    <div class="row">
+      <div class="show-for-medium-up medium-5 large-6 columns">
+        <h2>Sitios Web</h2>
+
+        <table id='sites_progress' class='loader'>
+          <tbody>
+          {% for site in sites %}
+            <tr class='site' data-id='{{ site.id }}'>
+              <td><span class="radius label">--.-- %</span></td>
+              <td><a href="{% url 'website' slug=site.slug %}">{{ site }}</a></td>
+              <td class='td_progress show-for-large-up'>
+                <div class="progress"></div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="small-12 medium-7 large-6 columns">
+        <h2>Resumen de actividad</h2>
+
+        <div id='actividad' class='loader' data-total='{{ sites.count }}'>
+          <div class='bloque'>
+            <canvas id="donut" width='160' height='160'></canvas>
+          </div>
+
+          <div id="donut_legenda" class='bloque'>
+          </div>
+
+          <div class="clearfix"></div>
+        </div>
+
+        <h2>Últimos Eventos</h2>
+
+        <table id='ultimos_eventos'>
+          <thead>
+          <tr>
+            <th>Evento</th>
+            <th>Sitio</th>
+            <th>Fecha y Hora</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for evento in ultimos_eventos %}
+            <tr>
+              <td>
+                {% if evento.0 %}
+                  <span class='up'>
+                  <i class="fi-arrow-up"></i> Activo
+                {% else %}
+                  <span class="down">
+                  <i class="fi-arrow-down"></i> Inactivo
+                {% endif %}
+                </span>
+              </td>
+              <td><a href="{% url 'website' slug=evento.3 %}">{{ evento.1 }}</a></td>
+
+              <td class='date show-for-large-up'>{{ evento.2|date:'o M d h:i a' }}</td>
+              <td class='date hide-for-large-up'>{{ evento.2|date:'M d H:i' }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src='{% static "js/libs/moment.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/libs/moment-es.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/libs/chart.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/dev.js" %}'></script>
+{% endblock js %}

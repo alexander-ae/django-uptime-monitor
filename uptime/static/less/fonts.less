@@ -1,0 +1,49 @@
+@import "variables.less";
+
+/* TIPOGRAFÍAS */
+
+body,
+.button,
+.label {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, legend {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.helvetica {
+    font-family: 'Helvetica';
+}
+
+
+/* COLOR DE TEXTO */
+
+.color_ok {
+    color: @color_ok;
+
+    &:hover {
+        color: darken(@color_ok, 10%);
+    }
+}
+
+.color_error {
+    color: @color_error;
+
+    &:hover {
+        color: darken(@color_error_light, 10%);
+    }
+}
+
+.color_gray {
+    color: @color_gray;
+
+    &:hover {
+        color: darken(@color_gray, 10%);
+    }
+}

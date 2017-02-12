@@ -1,0 +1,40 @@
+<!-- BARRA DE NAVEGACIÓN LATERAL -->
+<nav class='st-menu st-effect-1'>
+  <ul class="side-nav">
+    <li>
+      <a href="{% url 'dashboard' %}" class='menu_lateral_a'>
+        <i class="fi-monitor"></i>
+        <span>DASHBOARD</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'websites' %}" class='menu_lateral_a' title='Ver como listado'>
+        <i class="fi-list-thumbnails"></i>
+        <span>WEBSITES</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'website_new' %}" class='menu_lateral_a'>
+        <i class="fi-plus"></i>
+        <span>NUEVO WEBSITE</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'settings' %}" class='menu_lateral_a'>
+        <i class="fi-widget"></i>
+        <span>AJUSTES</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'logout' %}" class='menu_lateral_a logout'>
+        <i class="fi-power"></i>
+        <span>SALIR</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- FIN DE BARRA DE NAVEGACIÓN LATERAL -->

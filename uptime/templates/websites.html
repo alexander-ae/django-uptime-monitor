@@ -1,0 +1,143 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load uptime_tags %}
+
+{% block title %}Websites | {% endblock title %}
+
+{% block classbody %}websites{% endblock classbody %}
+
+{% block content %}
+  <div id='main-content' class="medium-12 large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <ul class="button-group">
+          <li>
+            <a id='nuevo_sitio' class="tiny radius success button left" href='{% url "website_new" %}'><i
+                class='icon fi-page-add'></i>NUEVO</a>
+          </li>
+
+          <li>
+            <form id='FormFiltroEstado' action="#">
+              {% if q %}
+                <input type="hidden" name='q' value='{{ q }}'>
+              {% endif %}
+              <select id="select-estado" name="s" data-s='{{ status }}'>
+                <option value="-1" selected>Estados</option>
+                <option value="all">Todos</option>
+                <option value="1" class='fi-arrow-up'>Activos</option>
+                <option value="0" class='fi-arrow-down'>Inactivos</option>
+                <option value="no-info" class='no-info'>Sin información</option>
+              </select>
+            </form>
+          </li>
+
+          <li>
+            <form id='searchForm' action="#" method='GET'>
+              <i class="fi-magnifying-glass search-icon"></i>
+              {% if status %}
+                <input type="hidden" value='{{ status }}' name='s'>
+              {% endif %}
+              <input id='search' type="search" class='radius' name='q' placeholder='Buscar..'
+                     {% if q %}value='{{ q }}'{% endif %}>
+            </form>
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        <div class="left">
+          <table>
+            <thead>
+            <tr>
+              <th>Nº</th>
+              <th>NOMBRE</th>
+              <th class='show-for-medium-up'>URL</th>
+              <th>ESTADO</th>
+              <th class='show-for-medium-up'>¿MONITORIZADO?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+              <tr class='site' data-id='{{ site.id }}'>
+                <td class='orden'>{{ forloop.counter|add:factor_adicional }}</td>
+
+                <td class='nombre'><a href="{% url 'website' slug=site.slug %}">{{ site|truncatechars:'32' }}</a></td>
+
+                <td class='url show-for-medium-up'><a href="{{ site.url }}"
+                                                      target="_blank">{{ site.url|truncatechars:'32' }}</a></td>
+
+                <td class="estado">
+                  {% with ultimos_eventos|get_item:site.id as estado %}
+                    {% if estado %}
+                      <span class="up"><i class="fi-arrow-up"></i> Activo</span>
+                    {% else %}
+                      {% if site.active %}
+                        <span class="down"><i class="fi-arrow-down"></i> Inactivo</span>
+                      {% endif %}
+                    {% endif %}
+                  {% endwith %}
+                </td>
+
+                <td class='monitor show-for-medium-up'>
+                  {% if site.active %}
+                    <span class="text-center block"><i class="fi-check"></i></span>
+                  {% else %}
+                    <span class="text-center block"><i class="fi-x"></i></span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          {% if paginator.num_pages > 1 %}
+            <ul class="pagination">
+              {% if sites.has_previous %}
+                <li class="arrow"><a data-p="{{ sites.previous_page_number }}">&laquo;</a></li>
+              {% else %}
+                <li class="arrow unavailable"><a data-p="">&laquo;</a></li>
+              {% endif %}
+
+              {% for pag in paginator.page_range %}
+                {% if pag == page_int %}
+                  <li class='current'><a data-p="">{{ pag }}</a></li>
+                {% else %}
+                  <li><a data-p="{{ pag }}">{{ pag }}</a></li>
+                {% endif %}
+
+              {% endfor %}
+
+              {% if sites.has_next %}
+                <li class="arrow"><a href="?p={{ sites.next_page_number }}">&raquo;</a></li>
+              {% else %}
+                <li class="arrow unavailable"><a href="">&raquo;</a></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src='{% static "js/libs/notify.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/libs/jquery.dropdown.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/util.js" %}'></script>
+  <script type="text/javascript" src='{% static "js/dev.js" %}'></script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          {% for message in messages %}
+              $.notify("{{ message }}", {
+                  className: 'success',
+                  globalPosition: 'top center',
+                  showDuration: 700
+              });
+          {% endfor %}
+      });
+  </script>
+{% endblock js %}

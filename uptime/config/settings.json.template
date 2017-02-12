@@ -1,0 +1,22 @@
+{
+    "SECRET_KEY": "my-super-secret-key",
+    "DB": "uptime",
+    "DB_USER": "my-db-user",
+    "DB_PASSWORD": "my-super-password",
+
+    "REDIS_HOST": "localhost",
+    "REDIS_DB": 0,
+    "REDIS_PORT": 6379,
+    "REDIS_PASSWORD": "my-super-password",
+
+    "ADMIN_EMAIL": "dev@dev.com",
+
+    "EMAIL_HOST": "",
+    "EMAIL_USER": "",
+    "EMAIL_PASSWORD": "",
+    "DEFAULT_FROM_EMAIL": "",
+    "SERVER_EMAIL": "",
+
+    "WORKON_HOME": "",
+    "VIRTUALENV": ""
+}

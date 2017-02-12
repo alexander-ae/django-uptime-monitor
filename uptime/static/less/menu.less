@@ -1,0 +1,102 @@
+// MENU
+
+@import "variables.less";
+
+.user-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
+
+
+#menu-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  padding: 1rem .5rem;
+  transition: .3s;
+  cursor: pointer;
+  border-radius: 0.5rem;
+
+  .user-select;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    transition: 0;
+  }
+
+  &.close {
+    -webkit-transform: scale3d(0.8, 0.8, 0.8);
+    transform: scale3d(0.8, 0.8, 0.8);
+
+    .lines,
+    .lines:before,
+    .lines:after {
+      background: @color_menu_close;
+    }
+  }
+}
+
+.lines {
+  display: inline-block;
+  width: 3rem;
+  height: .45rem;
+  background: @color_menu;
+  border-radius: 0.25rem;
+  transition: 0.3s;
+  position: relative;
+}
+
+.lines:before,
+.lines:after {
+  display: inline-block;
+  width: 3rem;
+  height: 0.45rem;
+  background: @color_menu;
+  border-radius: 0.25rem;
+  transition: 0.3s;
+  position: absolute;
+  left: 0;
+  content: '';
+  -webkit-transform-origin: 0.25rem center;
+  transform-origin: 0.25rem center;
+}
+
+.lines:before {
+  top: .8rem;
+}
+.lines:after {
+  top: -.8rem;
+}
+
+#menu-btn:hover .lines:before {
+  top: .9rem;
+}
+
+#menu-btn:hover .lines:after {
+  top: -.9rem;
+}
+
+#menu-btn.close .lines:before,
+#menu-btn.close .lines:after {
+  top: 0;
+  width: 2rem;
+}
+
+#menu-btn.close .lines:before {
+  -webkit-transform: rotate3d(0, 0, 1, 40deg);
+  transform: rotate3d(0, 0, 1, 40deg);
+}
+
+#menu-btn.close .lines:after {
+  -webkit-transform: rotate3d(0, 0, 1, -40deg);
+  transform: rotate3d(0, 0, 1, -40deg);
+}
