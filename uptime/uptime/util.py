@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import timedelta
 from django.conf import settings
 from django.db.models import Max
 from django.utils.timezone import now
@@ -11,6 +12,7 @@ from utils.check_uptime import check_uptime
 scheduler = django_rq.get_scheduler('default')
 
 TIEMPO_ENTRE_CHECKS = settings.UPTIME_TIEMPO_ENTRE_CHECKS
+TASK_DELETE_OLD_ID = 'delete_old'
 
 
 def cancel_all_jobs():
@@ -38,22 +40,19 @@ def start_all_jobs():
     scheduler = django_rq.get_scheduler('default')
 
     for site in sites:
-        scheduler.schedule(now(), check_uptime, args=(site.slug,),
-                           repeat=None, interval=TIEMPO_ENTRE_CHECKS)
+        scheduler.schedule(now(), check_uptime, args=(site.slug,), repeat=None, interval=TIEMPO_ENTRE_CHECKS)
 
 
 def get_ultimos_eventos(lista_id, up=None):
     """
-    Obtiene el listado de los últimos eventos para la lista de ID's de los
-    websites dados.
+    Obtiene el listado de los últimos eventos para la lista de ID's de los websites indicados.
     """
 
     from .models import Evento
 
     todos = Evento.objects.filter(
-        id__in=Evento.objects.filter(site_id__in=lista_id
-                                     ).values('site_id'
-                                              ).annotate(latest=Max('id')).values_list('latest', flat=True))
+        id__in=Evento.objects.filter(site_id__in=lista_id).values('site_id').annotate(
+            latest=Max('id')).values_list('latest', flat=True))
 
     if type(up) == bool:
         return todos.filter(up=up)
@@ -102,3 +101,22 @@ def filter_by_status(sites_list, status):
         sites_list = sites_list.exclude(id__in=all_sites_events)
 
     return sites_list
+
+
+def delete_old():
+    """
+    Elimina registros antiguos
+    """
+    from .models import Evento
+    from .models import Ping
+
+    time_limit = now() - timedelta(seconds=settings.UPTIME_TIEMPO_DE_EXPIRACION_DE_ESTADOS_Y_EVENTOS)
+
+    Evento.objects.filter(date_time__lte=time_limit).delete()
+    Ping.objects.filter(date_time__lte=time_limit).delete()
+
+
+if TASK_DELETE_OLD_ID in scheduler:
+    scheduler.cancel(TASK_DELETE_OLD_ID)
+
+scheduler.schedule(now(), delete_old, repeat=True, interval=TIEMPO_ENTRE_CHECKS, id=TASK_DELETE_OLD_ID)

@@ -60,11 +60,9 @@ class Ping(models.Model):
     """ Punto de verificación de estado de un sitio web. """
 
     site = models.ForeignKey(Site, related_name='pings')
-    date_time = models.DateTimeField(verbose_name=u'Fecha/Hora',
-                                     auto_now_add=True)
+    date_time = models.DateTimeField(verbose_name=u'Fecha/Hora', auto_now_add=True)
     up = models.BooleanField(verbose_name=u'¿Sitio activo?', default=False)
-    status_code = models.CharField(verbose_name=u'Status Code', max_length=4,
-                                   default='0')
+    status_code = models.CharField(verbose_name=u'Status Code', max_length=4, default='0')
     elapsed_time = models.FloatField(verbose_name=u'Tiempo transcurrido',
                                      help_text='Tiempo transcurrido desde la petición original '
                                                'en milisegundos', null=True)
@@ -87,8 +85,8 @@ class Evento(models.Model):
     site = models.ForeignKey(Site, related_name='eventos')
     date_time = models.DateTimeField(verbose_name=u'Fecha/Hora')
     up = models.BooleanField(verbose_name=u'¿Sitio activo?', default=False)
-    last_event = models.CharField(verbose_name=u'Estado anterior',
-                                  max_length=1, choices=choices.SITE_STATUS, default='0')
+    last_event = models.CharField(verbose_name=u'Estado anterior', max_length=1, choices=choices.SITE_STATUS,
+                                  default='0')
 
     class Meta:
         verbose_name = u'Evento'

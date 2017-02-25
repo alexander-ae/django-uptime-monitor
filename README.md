@@ -2,7 +2,7 @@
 
 ### Proyecto: django-uptime-monitor ###
 
-Aplicación web en django que permite monitorizar el estado de los sitios web registrados.
+Aplicación web en django que permite monitorizar el estado de los sitios web registrados ejecutando request del tipo HEAD.
 
 
 ### Requerimientos ###

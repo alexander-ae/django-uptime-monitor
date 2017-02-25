@@ -197,5 +197,11 @@ UPTIME_REDIS_PREFIX = 'uptime'
 
 UPTIME_ERRORES_CONSECUTIVOS_PARA_NOTIFICAR = 2
 
-# Tiempo de expiración de los contadores
+# tiempo de expiración de los contadores
 UPTIME_REDIS_EXPIRE = 60 * 60 * 24
+
+# tiempo para eliminar estados y eventos anteriores
+UPTIME_TIEMPO_DE_EXPIRACION_DE_ESTADOS_Y_EVENTOS = 7 * 24 * 60 * 60  # 1 semana
+
+# tiempo para ejecutar la tarea que elimina estados y eventos
+UPTIME_FRECUENCIA_TAREA_EXPIRACION = 24 * 60 * 60
