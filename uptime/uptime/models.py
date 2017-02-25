@@ -75,7 +75,7 @@ class Ping(models.Model):
         verbose_name_plural = u'Estados'
 
     def __str__(self):
-        return unicode(self.site)
+        return self.site.__str__()
 
 
 class Evento(models.Model):
@@ -95,7 +95,7 @@ class Evento(models.Model):
         verbose_name_plural = u'Eventos'
 
     def __str__(self):
-        return unicode(self.site)
+        return self.site.__str__()
 
 
 # Usuario

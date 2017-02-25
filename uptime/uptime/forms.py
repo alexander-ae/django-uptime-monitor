@@ -15,10 +15,9 @@ class SiteForm(forms.Form):
     active = forms.BooleanField(label=u'Activo', required=False, initial=True)
     name = forms.CharField(label='Nombre', max_length=120)
     url = forms.URLField(label='URL', max_length=120,
-        help_text='No olvide incluir el prefijo http o https según corresponda')
+                         help_text='No olvide incluir el prefijo http o https según corresponda')
     url.widget.attrs.update({'placeholder': 'https://www.python.org/'})
-    timeout = forms.IntegerField(label=u'Timeout', initial=1000,
-        help_text=u'Tiempo de espera máximo en milisegundos.')
+    timeout = forms.IntegerField(label=u'Timeout', initial=1000, help_text=u'Tiempo de espera máximo en milisegundos.')
 
     def clean_name(self):
         """ Verifica que el nombre no haya sido registrado. """
@@ -52,9 +51,9 @@ class SiteEditForm(forms.Form):
     active = forms.BooleanField(label=u'Activo', required=False)
     name = forms.CharField(label='Nombre', max_length=120)
     url = forms.URLField(label='URL', max_length=120,
-        help_text='No olvide incluir el prefijo http o https según corresponda')
+                         help_text='No olvide incluir el prefijo http o https según corresponda')
     timeout = forms.IntegerField(label=u'Timeout',
-        help_text=u'Tiempo de espera máximo en milisegundos.')
+                                 help_text=u'Tiempo de espera máximo en milisegundos.')
 
     def clean(self):
         slug = self.cleaned_data['slug']
@@ -103,7 +102,7 @@ class ConfigAlertasForm(forms.Form):
     """ Formulario de configuración global de las alertas  """
 
     alertas = forms.ChoiceField(label='Alertas Activas', choices=choices.ALERTAS_CONFIG,
-        initial='on')
+                                initial='on')
 
     def save(self, usuario):
         cd = self.cleaned_data

@@ -8,7 +8,7 @@ from django.utils.timezone import now
 
 import requests
 from requests.exceptions import (ConnectionError, HTTPError, URLRequired,
-    TooManyRedirects, Timeout)
+                                 TooManyRedirects, Timeout)
 import django_rq
 
 from .utils import timedelta_milliseconds

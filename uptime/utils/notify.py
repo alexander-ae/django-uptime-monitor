@@ -26,13 +26,9 @@ def notifica(site_id, ping_id):
 
     prefix = '{0}_{1}'.format(settings.UPTIME_REDIS_PREFIX, site_id)
 
-    usuarios_globales = UsuarioPerfil.objects.filter(alertas_activas='on'
-        ).values_list('user__email', flat=True)
-
-    usuarios_personalizados = site.usuarios_website.filter(
-        usuario__usuarioperfil__alertas_activas='maybe', alerta_email=True
-        ).values_list('usuario__email', flat=True)
-
+    usuarios_globales = UsuarioPerfil.objects.filter(alertas_activas='on').values_list('user__email', flat=True)
+    usuarios_personalizados = site.usuarios_website.filter(usuario__perfil__alertas_activas='maybe', alerta_email=True
+                                                           ).values_list('usuario__email', flat=True)
     usuarios_a_notificar = set(list(usuarios_globales) + list(usuarios_personalizados))
 
     num_errores = r.incr(prefix)

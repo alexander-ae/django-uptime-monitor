@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.views import logout_then_login
 from django.shortcuts import render, redirect
-from django.template import RequestContext as ctx
 
 from .forms import LoginForm
 
@@ -42,10 +41,10 @@ def login_view(request):
                     return redirect('dashboard')
                 else:
                     messages.add_message(request, messages.WARNING,
-                        'El usuario no se encuentra activo')
+                                         'El usuario no se encuentra activo')
             else:
                 messages.add_message(request, messages.ERROR,
-                        u'El email y contraseña son inválidos')
+                                     u'El email y contraseña son inválidos')
         else:
             log.warning('Error de formulario')
     else:

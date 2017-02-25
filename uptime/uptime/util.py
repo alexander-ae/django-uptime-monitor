@@ -39,7 +39,7 @@ def start_all_jobs():
 
     for site in sites:
         scheduler.schedule(now(), check_uptime, args=(site.slug,),
-            repeat=None, interval=TIEMPO_ENTRE_CHECKS)
+                           repeat=None, interval=TIEMPO_ENTRE_CHECKS)
 
 
 def get_ultimos_eventos(lista_id, up=None):
@@ -51,8 +51,9 @@ def get_ultimos_eventos(lista_id, up=None):
     from .models import Evento
 
     todos = Evento.objects.filter(
-        id__in=Evento.objects.filter(site_id__in=lista_id).values('site_id'
-        ).annotate(latest=Max('id')).values_list('latest', flat=True))
+        id__in=Evento.objects.filter(site_id__in=lista_id
+                                     ).values('site_id'
+                                              ).annotate(latest=Max('id')).values_list('latest', flat=True))
 
     if type(up) == bool:
         return todos.filter(up=up)

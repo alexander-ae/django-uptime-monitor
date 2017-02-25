@@ -15,12 +15,12 @@ class LoginForm(forms.Form):
 
     username = forms.CharField()
     username.widget.attrs.update({'autofocus': 'autofocus', 'tabindex': '1',
-        'required': 'required', 'placeholder': 'usuario'})
+                                  'required': 'required', 'placeholder': 'usuario'})
 
     password = forms.CharField(min_length=5, max_length=36,
-        widget=forms.PasswordInput)
+                               widget=forms.PasswordInput)
     password.widget.attrs.update({'required': 'required', 'tabindex': '2',
-        'placeholder': 'contraseña'})
+                                  'placeholder': 'contraseña'})
 
     def clean_username(self):
         username = self.cleaned_data['username']

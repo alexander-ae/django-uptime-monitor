@@ -68,14 +68,14 @@ class ColorizingStreamHandler(logging.StreamHandler):
         ansi_esc = re.compile(r'\x1b\[((?:\d+)(?:;(?:\d+))*)m')
 
         nt_color_map = {
-            0: 0x00,    # black
-            1: 0x04,    # red
-            2: 0x02,    # green
-            3: 0x06,    # yellow
-            4: 0x01,    # blue
-            5: 0x05,    # magenta
-            6: 0x03,    # cyan
-            7: 0x07,    # white
+            0: 0x00,  # black
+            1: 0x04,  # red
+            2: 0x02,  # green
+            3: 0x06,  # yellow
+            4: 0x01,  # blue
+            5: 0x05,  # magenta
+            6: 0x03,  # cyan
+            7: 0x07,  # white
         }
 
         def output_colorized(self, message):
@@ -108,7 +108,7 @@ class ColorizingStreamHandler(logging.StreamHandler):
                             else:
                                 pass  # error condition ignored
                         ctypes.windll.kernel32.SetConsoleTextAttribute(h,
-                            color)
+                                                                       color)
 
     def colorize(self, message, record):
         if record.levelno in self.level_map:
@@ -144,6 +144,7 @@ def main():
     logging.warning('WARNING')
     logging.error('ERROR')
     logging.critical('CRITICAL')
+
 
 if __name__ == '__main__':
     main()

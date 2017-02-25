@@ -6,7 +6,6 @@ from datetime import timedelta
 from os.path import join
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-print
 with open(join(BASE_DIR, 'config/settings.json')) as f:
     env = json.load(f)
 
