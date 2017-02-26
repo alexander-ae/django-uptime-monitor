@@ -49,3 +49,15 @@ El proyecto está diseñado para requerir una configuración mínima, los pasos 
 ### Licencia ###
 
 Ver archivo LICENSE
+
+
+### Screenshots ###
+
+#### Dashboard ####
+![uptime - dashboard](screenshots/dashboard.png "Dashboard")
+
+#### Menú ####
+![uptime - menu](screenshots/menu.png "Menú")
+
+#### Proyectos ####
+![uptime - proyectos](screenshots/lista_de_proyectos.png "Proyectos")
